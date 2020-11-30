@@ -24,6 +24,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class MainActivity extends AppCompatActivity {
 
     //public static String mDeviceIMEI = "0";
@@ -39,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText password = findViewById(R.id.ed_password);
-        CheckBox cb = findViewById(R.id.checkBox);
         imei = findViewById(R.id.ed_imei);
         getImei();
+
+        EditText password = findViewById(R.id.ed_password);
+        CheckBox cb = findViewById(R.id.checkBox);
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -53,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     //隱藏密碼
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-
                 }
             }
         });
-
     }
 
     public void login(View view) {
